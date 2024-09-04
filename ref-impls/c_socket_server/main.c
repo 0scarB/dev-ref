@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
 
                 if (pollfd->fd == listen_sock_fd) {
                     //
-                    // If the listening socket is ready to ready from,
+                    // If the listening socket is ready to read from,
                     // accept the new connection socket and add it to the
                     // list of sockets to poll from.
                     //
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
                            conn_count);
                 } else {
                     //
-                    // Handle connections sockets.
+                    // Handle connection sockets.
                     //
                     char*   recv_buf = conn_recv_bufs[i];
                     size_t* recv_len = conn_recv_lens+i;
@@ -275,7 +275,7 @@ int main(int argc, char* argv[]) {
             close(conn_sock_fd);
     } else {
         fprintf(stderr,
-                "First argument must be 'server' or 'client'");
+                "First argument must be 'server' or 'client'\n");
         exit(1);
     }
 
