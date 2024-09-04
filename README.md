@@ -12,7 +12,7 @@ Can be found in the [ref-impls](./ref-impls/) directory.
 A list of high-quality sources.
 
 ### C Socket Servers
-- [Beej's Guide to Network Programming](./https://beej.us/guide/bgnet/html/split/index.html)
+- [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/index.html)
 
 ### Networking
 - [Ben Eater's Networking Tutorial (Youtube playlist)](https://www.youtube.com/watch?v=XaGXPObx2Gs&list=PLowKtXNTBypH19whXTVoG3oKSuOcw_XeW)
