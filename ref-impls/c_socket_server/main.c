@@ -1,3 +1,8 @@
+/*
+ * (c) 2024. This work is openly licensed via CC BY 4.0.
+ * See this repository's root README file for how to give credit.
+ */
+
 #include <fcntl.h>
 #include <netdb.h>
 #include <poll.h>

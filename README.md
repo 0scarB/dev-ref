@@ -20,3 +20,12 @@ A list of high-quality sources.
 ### Terminals
 - [POSIX General Terminal Interface, IEEE Std 1003.1-2024](https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap11.html)
 
+
+## Licensing and Giving Credit / Attribution
+
+Source files, starting with a comment, containing the line
+> (c) YYYY. This work is openly licensed via CC BY 4.0.
+
+are licensed under the Creative Commons Attribution 4.0 International license.
+**Give credit by linking to this Git repository!**
+
