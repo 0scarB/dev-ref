@@ -1,7 +1,12 @@
-// When --target=wasm32 in passed to clang, it will use the a port of lld
+/*
+ * (c) 2024. This work is openly licensed via CC BY 4.0.
+ * See this repository's root README file for how to give credit.
+ */
+
+// When --target=wasm32 in passed to clang, it will use a port of lld
 // for WebAssembly as a linker https://lld.llvm.org/WebAssembly.html
 
-// The linker port understands the attribute "import_name". Functions
+// The linker port understands the attribute "import_name". Function
 // definitions with the import_name attribute are JavaScript functions,
 // supplied in the WASM imports object, in "env" (by default).
 __attribute__((import_name("displayInBrowser")))

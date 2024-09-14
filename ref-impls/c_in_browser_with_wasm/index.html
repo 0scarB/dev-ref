@@ -1,3 +1,8 @@
+<!--
+(c) 2024. This work is openly licensed via CC BY 4.0.
+See this repository's root README file for how to give credit.
+-->
+
 <html>
 
 <title>Example: Run C in the Browser with WASM</title>
@@ -22,7 +27,9 @@
         WebAssembly.instantiateStreaming(fetch("main.wasm", {headers}), {
             // WASM imports object
             env: {
-                // We call this function in our C code
+                //
+                // We call these functions in our C code
+                //
                 displayInBrowser(strPtr, strLen) {
                     // C arrays and structs are passed as pointers into WASM memory.
                     // wasmMemory.buffer is an ArrayBuffer object which we can't access
