@@ -6,6 +6,7 @@ Can be found in the [ref-impls](./ref-impls/) directory.
 
 - [C Socket Client/Server using `poll` for multiplexing and non-blocking I/O](./ref-impls/c_socket_server/main.c)
 - [A Simple Testing Framework in C](./ref-impls/c_test_framework/main.c) -- Extensible; easily translatable to other languages
+- [Running C in the browser with WebAssembly](./ref-impls/c_in_browser_with_wasm)
 
 ## External Resources
 
@@ -19,6 +20,10 @@ A list of high-quality sources.
 
 ### Terminals
 - [POSIX General Terminal Interface, IEEE Std 1003.1-2024](https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap11.html)
+
+### WebAssembly
+- [Compiling C to WebAssembly without Emscripten](https://surma.dev/things/c-to-webassembly/)
+- [WebAssembly lld port](https://lld.llvm.org/WebAssembly.html)
 
 
 ## Licensing and Giving Credit / Attribution

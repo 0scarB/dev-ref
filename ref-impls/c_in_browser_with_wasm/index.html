@@ -1,0 +1,80 @@
+<html>
+
+<title>Example: Run C in the Browser with WASM</title>
+
+<pre id="output"></pre>
+<script>
+    const DEV = true;
+
+    window.onload = () => {
+        let wasmMemory;
+
+        const MEMORY_PAGE_SIZE = 64*1024;
+        // Stateful variables for our `alloc` function
+        let dynamicallyAllocatedMemoryStart;
+        let dynamicallyAllocatedMemoryStop;
+        let dynamicallyAllocatedMemoryPtr;
+
+        let headers = {};
+        if (DEV) {
+            headers = {"If-Modified-Since": ""};
+        }
+        WebAssembly.instantiateStreaming(fetch("main.wasm", {headers}), {
+            // WASM imports object
+            env: {
+                // We call this function in our C code
+                displayInBrowser(strPtr, strLen) {
+                    // C arrays and structs are passed as pointers into WASM memory.
+                    // wasmMemory.buffer is an ArrayBuffer object which we can't access
+                    // directly so we need to use Uint8Array to get access to the
+                    // byte values of the string that we're displaying...
+                    // Web-standards APIs love imposing unnecessary tedium and
+                    // inefficiency :(
+                    const strBytes = new Uint8Array(wasmMemory.buffer, strPtr, strLen);
+
+                    let str = "";
+                    for (charCode of strBytes) {
+                        str += String.fromCharCode(charCode);
+                    }
+                    // NOTE: You should use TextDecoder instead for UTF8 support
+                    //       and efficiency
+
+                    document.getElementById("output").innerHTML = str;
+                },
+
+                alloc(size) {
+                    // Grow memory if needed
+                    while (size >
+                        dynamicallyAllocatedMemoryStop -
+                        dynamicallyAllocatedMemoryPtr
+                    ) {
+                        wasmMemory.grow(1);
+                        dynamicallyAllocatedMemoryStop += MEMORY_PAGE_SIZE;
+                    }
+
+                    const result = dynamicallyAllocatedMemoryPtr;
+
+                    dynamicallyAllocatedMemoryPtr += size;
+
+                    return result;
+                },
+            }
+        }).then(result => {
+            const wasmInst = result.instance;
+            wasmMemory = wasmInst.exports.memory;
+
+            // `wasmMemory.grow(0)` returns the size of WASM memory in pages.
+            // We use the return value to initialise the variables used by our
+            // `alloc` function.
+            dynamicallyAllocatedMemoryStart = wasmMemory.grow(0)*MEMORY_PAGE_SIZE;
+            dynamicallyAllocatedMemoryStop  = dynamicallyAllocatedMemoryStart;
+            dynamicallyAllocatedMemoryPtr   = dynamicallyAllocatedMemoryStart;
+
+            // We call our C code's "main" function from JavaScript
+            wasmInst.exports.main();
+        });
+    }
+</script>
+
+</html>
+
